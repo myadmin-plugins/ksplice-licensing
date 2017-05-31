@@ -2,7 +2,6 @@
 
 namespace Detain\MyAdminKsplice;
 
-use Detain\Ksplice\Ksplice;
 use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
