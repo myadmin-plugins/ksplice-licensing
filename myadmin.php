@@ -17,8 +17,8 @@ return [
 	'hooks' => [
 		'function.requirements' => ['Detain\MyAdminKsplice\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminKsplice\Plugin', 'Settings'],
-		/* 'licenses.activate' => ['Detain\MyAdminKsplice\Plugin', 'Activate'],
-		'licenses.change_ip' => ['Detain\MyAdminKsplice\Plugin', 'ChangeIp'],
+		'licenses.activate' => ['Detain\MyAdminKsplice\Plugin', 'Activate'],
+		/* 'licenses.change_ip' => ['Detain\MyAdminKsplice\Plugin', 'ChangeIp'],
 		'ui.menu' => ['Detain\MyAdminKsplice\Plugin', 'Menu'] */
 	],
 ];
