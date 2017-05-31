@@ -1,0 +1,71 @@
+<?php
+
+namespace Detain\MyAdminKsplice;
+
+use Detain\Ksplice\Ksplice;
+use Symfony\Component\EventDispatcher\GenericEvent;
+
+class Plugin {
+
+	public function __construct() {
+	}
+
+	public static function Activate(GenericEvent $event) {
+		// will be executed when the licenses.license event is dispatched
+		$license = $event->getSubject();
+		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
+			myadmin_log('licenses', 'info', 'Ksplice Activation', __LINE__, __FILE__);
+			function_requirements('activate_ksplice');
+			activate_ksplice($license->get_ip(), $event['field1']);
+			$event->stopPropagation();
+		}
+	}
+
+	public static function ChangeIp(GenericEvent $event) {
+		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
+			$license = $event->getSubject();
+			$settings = get_module_settings('licenses');
+			$ksplice = new Ksplice(KSPLICE_USERNAME, KSPLICE_PASSWORD);
+			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			$result = $ksplice->editIp($license->get_ip(), $event['newip']);
+			if (isset($result['faultcode'])) {
+				myadmin_log('licenses', 'error', 'Ksplice editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+				$event['status'] = 'error';
+				$event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
+			} else {
+				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $license->get_ip());
+				$license->set_ip($event['newip'])->save();
+				$event['status'] = 'ok';
+				$event['status_text'] = 'The IP Address has been changed.';
+			}
+			$event->stopPropagation();
+		}
+	}
+
+	public static function Menu(GenericEvent $event) {
+		// will be executed when the licenses.settings event is dispatched
+		$menu = $event->getSubject();
+		$module = 'licenses';
+		if ($GLOBALS['tf']->ima == 'admin') {
+			$menu->add_link($module, 'choice=none.reusable_ksplice', 'icons/database_warning_48.png', 'ReUsable Ksplice Licenses');
+			$menu->add_link($module, 'choice=none.ksplice_list', 'icons/database_warning_48.png', 'Ksplice Licenses Breakdown');
+			$menu->add_link($module.'api', 'choice=none.ksplice_licenses_list', 'whm/createacct.gif', 'List all Ksplice Licenses');
+		}
+	}
+
+	public static function Requirements(GenericEvent $event) {
+		// will be executed when the licenses.loader event is dispatched
+		$loader = $event->getSubject();
+		$loader->add_requirement('class.Ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/Ksplice.php');
+		$loader->add_requirement('deactivate_ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/ksplice.inc.php');
+	}
+
+	public static function Settings(GenericEvent $event) {
+		// will be executed when the licenses.settings event is dispatched
+		$settings = $event->getSubject();
+		$settings->add_text_setting('apisettings', 'ksplice_api_username', 'Ksplice API Username:', 'Ksplice API Username', $settings->get_setting('KSPLICE_API_USERNAME'));
+		$settings->add_text_setting('apisettings', 'ksplice_api_key', 'Ksplice API Key:', 'Ksplice API Key', $settings->get_setting('KSPLICE_API_KEY'));
+		$settings->add_dropdown_setting('stock', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes', ));
+	}
+
+}

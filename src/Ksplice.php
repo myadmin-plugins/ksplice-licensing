@@ -1,0 +1,154 @@
+<?php
+/**
+ * Ksplice Functionality
+ *
+ * API Documentation at http://www.ksplice.com/uptrack/api
+ *
+ * Last Changed: $LastChangedDate: 2017-05-31 17:13:05 -0400 (Wed, 31 May 2017) $
+ * @author detain
+ * @version $Revision: 24968 $
+ * @copyright 2017
+ * @package MyAdmin
+ * @category Licenses
+ */
+
+namespace Detain\MyAdminKsplice;
+
+/**
+ * Ksplice
+ *
+ * @access public
+ */
+class Ksplice
+{
+	private $api_key;
+	private $api_username;
+	private $url_base = 'https://uptrack.api.ksplice.com';
+	public $url = '';
+	public $method = 'GET';
+	public $headers = [];
+	public $inputs = '';
+	public $response_raw = '';
+	public $response = [];
+	private $rest_client;
+	public $machines_loaded = false;
+	public $ips = [];
+	public $hosts = [];
+	public $uuids = [];
+
+	/**
+	 * Ksplice::__construct()
+	 * @return \Ksplice
+	 */
+	public function __construct($api_username, $api_key) {
+		$this->api_username = $api_username;
+		$this->api_key = $api_key;
+		require_once(__DIR__ . '/../rendering/RESTClient.php');
+		$this->rest_client = new RESTClient();
+		$this->headers = array(
+			'X-Uptrack-User' => $this->api_username,
+			'X-Uptrack-Key' => $this->api_key,
+			'Accept' => 'application/json');
+	}
+
+	/**
+	 * Ksplice::request()
+	 *
+	 * @return void
+	 */
+	public function request() {
+		$this->rest_client->createRequest($this->url_base . $this->url, $this->method, $this->inputs, $this->headers);
+		$this->rest_client->sendRequest();
+		$this->response_raw = $this->rest_client->getResponse();
+		$this->response = json_decode($this->response_raw);
+		return $this->response;
+	}
+
+	/**
+	 * Ksplice::list_machines()
+	 *
+	 * @return void
+	 */
+	public function list_machines() {
+		$this->url = '/api/1/machines';
+		$this->method = 'GET';
+		$machines = obj2array($this->request());
+		foreach ($machines as $idx => $data) {
+			$this->ips[$data['ip']] = $data;
+			$this->hosts[$data['hostname']] = $data;
+			$this->uuids[$data['uuid']] = $data;
+		}
+		$this->machines_loaded = true;
+		return $this->response;
+	}
+
+	/**
+	 * Ksplice::describe_machine()
+	 *
+	 * @param mixed $uuid
+	 * @return void
+	 */
+	public function describe_machine($uuid) {
+		$this->url = '/api/1/machine/' . $uuid . '/describe';
+		$this->method = 'GET';
+		return $this->request();
+	}
+
+	/**
+	 * Ksplice::ip_to_uuid()
+	 *
+	 * @param mixed $ip
+	 * @return string|bool
+	 */
+	public function ip_to_uuid($ip) {
+		if (!$this->machines_loaded) {
+			$this->list_machines();
+		}
+		if (isset($this->ips[$ip])) {
+			return $this->ips[$ip]['uuid'];
+		} else {
+			return false;
+		}
+	}
+
+	/**
+	 * Ksplice::authorize_machine()
+	 *
+	 * @param mixed $uuid
+	 * @param bool $authorize
+	 * @return void
+	 */
+	public function authorize_machine($uuid, $authorize = true) {
+		$this->url = '/api/1/machine/' . $uuid . '/authorize';
+		$this->method = 'POST';
+		$this->inputs = json_encode(array('authorized' => $authorize));
+		$this->request();
+		if ($authorize == true)
+			myadmin_log('licenses', 'info', "Authorize Ksplice ({$uuid}, {$authorize}) Response: " . json_encode($this->response), __LINE__, __FILE__);
+		else
+			myadmin_log('licenses', 'info', "Deauthorize Ksplice ({$uuid}, {$authorize}) Response: " . json_encode($this->response), __LINE__, __FILE__);
+		return $this->response;
+	}
+
+	/**
+	 * @param $uuid
+	 */
+	public function deauthorize_machine($uuid) {
+		return $this->authorize_machine($uuid, false);
+	}
+
+	/**
+	 * Ksplice::change_group()
+	 *
+	 * @param mixed $uuid
+	 * @param string $group_name
+	 * @return void
+	 */
+	public function change_group($uuid, $group_name = '') {
+		$this->url = '/api/1/machine/' . $uuid . '/group';
+		$this->method = 'POST';
+		$this->inputs = json_encode(array('group_name' => $group_name));
+		return $this->request();
+	}
+
+}
