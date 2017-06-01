@@ -26,6 +26,16 @@ class Plugin {
 		}
 	}
 
+	public static function Deactivate(GenericEvent $event) {
+		$license = $event->getSubject();
+		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
+			myadmin_log('licenses', 'info', 'Ksplice Deactivation', __LINE__, __FILE__);
+			function_requirements('deactivate_ksplice');
+			deactivate_ksplice($license->get_ip());
+			$event->stopPropagation();
+		}
+	}
+
 	public static function ChangeIp(GenericEvent $event) {
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
 			$license = $event->getSubject();

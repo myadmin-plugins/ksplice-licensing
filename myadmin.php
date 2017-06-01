@@ -18,6 +18,7 @@ return [
 		'function.requirements' => ['Detain\MyAdminKsplice\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminKsplice\Plugin', 'Settings'],
 		'licenses.activate' => ['Detain\MyAdminKsplice\Plugin', 'Activate'],
+		'licenses.deactivate' => ['Detain\MyAdminKsplice\Plugin', 'Deactivate'],
 		/* 'licenses.change_ip' => ['Detain\MyAdminKsplice\Plugin', 'ChangeIp'],
 		'ui.menu' => ['Detain\MyAdminKsplice\Plugin', 'Menu'] */
 	],
