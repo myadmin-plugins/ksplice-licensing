@@ -80,7 +80,7 @@ class Plugin {
 		$settings = $event->getSubject();
 		$settings->add_text_setting('licenses', 'apisettings', 'ksplice_api_username', 'Ksplice API Username:', 'Ksplice API Username', $settings->get_setting('KSPLICE_API_USERNAME'));
 		$settings->add_text_setting('licenses', 'apisettings', 'ksplice_api_key', 'Ksplice API Key:', 'Ksplice API Key', $settings->get_setting('KSPLICE_API_KEY'));
-		$settings->add_dropdown_setting('stock', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes', ));
+		$settings->add_dropdown_setting('licenses', 'stock', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes', ));
 	}
 
 }
