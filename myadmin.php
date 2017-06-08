@@ -13,7 +13,7 @@ return [
 	'home' => 'https://github.com/detain/myadmin-ksplice-licensing',
 	'repo' => 'https://github.com/detain/myadmin-ksplice-licensing',
 	'version' => '1.0.0',
-	'type' => 'licenses',
+	'type' => 'service',
 	'hooks' => [
 		'function.requirements' => ['Detain\MyAdminKsplice\Plugin', 'Requirements'],
 		'licenses.settings' => ['Detain\MyAdminKsplice\Plugin', 'Settings'],
