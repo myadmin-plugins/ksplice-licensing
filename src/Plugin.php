@@ -18,10 +18,10 @@ class Plugin {
 
 	public static function Hooks() {
 		return [
-			'function.requirements' => ['Detain\MyAdminKsplice\Plugin', 'Requirements'],
-			'licenses.settings' => ['Detain\MyAdminKsplice\Plugin', 'Settings'],
-			'licenses.activate' => ['Detain\MyAdminKsplice\Plugin', 'Activate'],
-			'licenses.deactivate' => ['Detain\MyAdminKsplice\Plugin', 'Deactivate'],
+			'function.requirements' => [__CLASS__, 'Requirements'],
+			'licenses.settings' => [__CLASS__, 'Settings'],
+			'licenses.activate' => [__CLASS__, 'Activate'],
+			'licenses.deactivate' => [__CLASS__, 'Deactivate'],
 		];
 	}
 
