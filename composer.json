@@ -15,6 +15,18 @@
 		"minimum-stability": "dev"
 	},
     "repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "pear/HTTP_Request",
+				"version": "trunk",
+				"source": {
+					"url": "https://github.com/pear/HTTP_Request.git",
+					"type": "git",
+					"reference": "trunk"
+				}
+			}
+		},
         {
             "type": "git",
             "url": "https://github.com/detain/myadmin-plugin-installer"
@@ -22,7 +34,7 @@
     ],
     "require": {
         "php": ">=5.0.0",
-        "pear/http_request": "*",
+	"pear/HTTP_Request": "dev-trunk",
 	"symfony/event-dispatcher": "*",
 	"detain/myadmin-plugin-installer": "dev-master"
     },
