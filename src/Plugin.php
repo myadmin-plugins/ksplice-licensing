@@ -6,7 +6,23 @@ use Symfony\Component\EventDispatcher\GenericEvent;
 
 class Plugin {
 
+	public static $name = 'Ksplice Licensing';
+	public static $description = 'Allows selling of Ksplice Server and VPS License Types.  More info at https://www.netenberg.com/ksplice.php';
+	public static $help = 'It provides more than one million end users the ability to quickly install dozens of the leading open source content management systems into their web space.  	Must have a pre-existing cPanel license with cPanelDirect to purchase a ksplice license. Allow 10 minutes for activation.';
+	public static $module = 'licenses';
+	public static $type = 'service';
+
+
 	public function __construct() {
+	}
+
+	public static function Hooks() {
+		return [
+			'function.requirements' => ['Detain\MyAdminKsplice\Plugin', 'Requirements'],
+			'licenses.settings' => ['Detain\MyAdminKsplice\Plugin', 'Settings'],
+			'licenses.activate' => ['Detain\MyAdminKsplice\Plugin', 'Activate'],
+			'licenses.deactivate' => ['Detain\MyAdminKsplice\Plugin', 'Deactivate'],
+		];
 	}
 
 	public static function Activate(GenericEvent $event) {
