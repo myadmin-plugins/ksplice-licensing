@@ -31,7 +31,7 @@ class Ksplice
 	public $response_raw = '';
 	public $response = [];
 	private $rest_client;
-	public $machines_loaded = false;
+	public $machines_loaded = FALSE;
 	public $ips = [];
 	public $hosts = [];
 	public $uuids = [];
@@ -78,7 +78,7 @@ class Ksplice
 			$this->hosts[$data['hostname']] = $data;
 			$this->uuids[$data['uuid']] = $data;
 		}
-		$this->machines_loaded = true;
+		$this->machines_loaded = TRUE;
 		return $this->response;
 	}
 
@@ -107,7 +107,7 @@ class Ksplice
 		if (isset($this->ips[$ip])) {
 			return $this->ips[$ip]['uuid'];
 		} else {
-			return false;
+			return FALSE;
 		}
 	}
 
@@ -118,12 +118,12 @@ class Ksplice
 	 * @param bool $authorize
 	 * @return void
 	 */
-	public function authorize_machine($uuid, $authorize = true) {
+	public function authorize_machine($uuid, $authorize = TRUE) {
 		$this->url = '/api/1/machine/' . $uuid . '/authorize';
 		$this->method = 'POST';
 		$this->inputs = json_encode(array('authorized' => $authorize));
 		$this->request();
-		if ($authorize == true)
+		if ($authorize == TRUE)
 			myadmin_log('licenses', 'info', "Authorize Ksplice ({$uuid}, {$authorize}) Response: " . json_encode($this->response), __LINE__, __FILE__);
 		else
 			myadmin_log('licenses', 'info', "Deauthorize Ksplice ({$uuid}, {$authorize}) Response: " . json_encode($this->response), __LINE__, __FILE__);
@@ -134,7 +134,7 @@ class Ksplice
 	 * @param $uuid
 	 */
 	public function deauthorize_machine($uuid) {
-		return $this->authorize_machine($uuid, false);
+		return $this->authorize_machine($uuid, FALSE);
 	}
 
 	/**
