@@ -97,15 +97,15 @@ class Ksplice
 	/**
 	 * Ksplice::ip_to_uuid()
 	 *
-	 * @param mixed $ip
+	 * @param mixed $ipAddress
 	 * @return string|bool
 	 */
-	public function ip_to_uuid($ip) {
+	public function ip_to_uuid($ipAddress) {
 		if (!$this->machines_loaded) {
 			$this->list_machines();
 		}
-		if (isset($this->ips[$ip])) {
-			return $this->ips[$ip]['uuid'];
+		if (isset($this->ips[$ipAddress])) {
+			return $this->ips[$ipAddress]['uuid'];
 		} else {
 			return FALSE;
 		}
