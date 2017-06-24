@@ -20,12 +20,12 @@ class Plugin {
 		return [
 			'function.requirements' => [__CLASS__, 'getRequirements'],
 			'licenses.settings' => [__CLASS__, 'getSettings'],
-			'licenses.activate' => [__CLASS__, 'Activate'],
+			'licenses.activate' => [__CLASS__, 'getActivate'],
 			'licenses.deactivate' => [__CLASS__, 'Deactivate'],
 		];
 	}
 
-	public static function Activate(GenericEvent $event) {
+	public static function getActivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
 			myadmin_log('licenses', 'info', 'Ksplice Activation', __LINE__, __FILE__);
