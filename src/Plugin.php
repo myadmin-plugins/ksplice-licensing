@@ -28,15 +28,15 @@ class Plugin {
 	public static function getActivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
-			myadmin_log('licenses', 'info', 'Ksplice Activation', __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Ksplice Activation', __LINE__, __FILE__);
 			function_requirements('activate_ksplice');
 			activate_ksplice($license->get_ip(), $event['field1']);
 			$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
 			$uuid = $ksplice->ip_to_uuid($license->get_ip());
-			myadmin_log('licenses', 'info', "Got UUID $uuid from IP " . $license->get_ip(), __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP " . $license->get_ip(), __LINE__, __FILE__);
 			$ksplice->authorize_machine($uuid, TRUE);
-			myadmin_log('licenses', 'info', 'Response: ' . $ksplice->responseRaw, __LINE__, __FILE__);
-			myadmin_log('licenses', 'info', 'Response: ' . json_encode($ksplice->response), __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Response: ' . $ksplice->responseRaw, __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Response: ' . json_encode($ksplice->response), __LINE__, __FILE__);
 			$event->stopPropagation();
 		}
 	}
@@ -44,7 +44,7 @@ class Plugin {
 	public static function getgetDeactivate(GenericEvent $event) {
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
-			myadmin_log('licenses', 'info', 'Ksplice Deactivation', __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Ksplice Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_ksplice');
 			deactivate_ksplice($license->get_ip());
 			$event->stopPropagation();
@@ -54,12 +54,12 @@ class Plugin {
 	public static function getChangeIp(GenericEvent $event) {
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
 			$license = $event->getSubject();
-			$settings = get_module_settings('licenses');
+			$settings = get_module_settings(self::$module);
 			$ksplice = new Ksplice(KSPLICE_USERNAME, KSPLICE_PASSWORD);
-			myadmin_log('licenses', 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$license->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
 			$result = $ksplice->editIp($license->get_ip(), $event['newip']);
 			if (isset($result['faultcode'])) {
-				myadmin_log('licenses', 'error', 'Ksplice editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+				myadmin_log(self::$module, 'error', 'Ksplice editIp('.$license->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
 				$event['status'] = 'error';
 				$event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
 			} else {
@@ -89,9 +89,9 @@ class Plugin {
 
 	public static function getSettings(GenericEvent $event) {
 		$settings = $event->getSubject();
-		$settings->add_text_setting('licenses', 'KSplice', 'ksplice_apiUsername', 'Ksplice API Username:', 'Ksplice API Username', $settings->get_setting('KSPLICE_API_USERNAME'));
-		$settings->add_text_setting('licenses', 'KSplice', 'ksplice_apiKey', 'Ksplice API Key:', 'Ksplice API Key', $settings->get_setting('KSPLICE_API_KEY'));
-		$settings->add_dropdown_setting('licenses', 'KSplice', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes', ));
+		$settings->add_text_setting(self::$module, 'KSplice', 'ksplice_apiUsername', 'Ksplice API Username:', 'Ksplice API Username', $settings->get_setting('KSPLICE_API_USERNAME'));
+		$settings->add_text_setting(self::$module, 'KSplice', 'ksplice_apiKey', 'Ksplice API Key:', 'Ksplice API Key', $settings->get_setting('KSPLICE_API_KEY'));
+		$settings->add_dropdown_setting(self::$module, 'KSplice', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes', ));
 	}
 
 }
