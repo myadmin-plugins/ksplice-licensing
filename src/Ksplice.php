@@ -143,13 +143,13 @@ class Ksplice
 	 * Ksplice::change_group()
 	 *
 	 * @param mixed $uuid
-	 * @param string $group_name
+	 * @param string $groupName
 	 * @return void
 	 */
-	public function change_group($uuid, $group_name = '') {
+	public function change_group($uuid, $groupName = '') {
 		$this->url = '/api/1/machine/' . $uuid . '/group';
 		$this->method = 'POST';
-		$this->inputs = json_encode(array('group_name' => $group_name));
+		$this->inputs = json_encode(array('group_name' => $groupName));
 		return $this->request();
 	}
 
