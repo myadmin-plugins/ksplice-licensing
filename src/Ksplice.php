@@ -28,10 +28,10 @@ class Ksplice
 	public $method = 'GET';
 	public $headers = [];
 	public $inputs = '';
-	public $response_raw = '';
+	public $responseRaw = '';
 	public $response = [];
-	private $rest_client;
-	public $machines_loaded = FALSE;
+	private $restClient;
+	public $machinesLoaded = FALSE;
 	public $ips = [];
 	public $hosts = [];
 	public $uuids = [];
@@ -46,7 +46,7 @@ class Ksplice
 		if (file_exists(__DIR__ . '/../../../../include/rendering/RESTClient.php'))
 			include_once(__DIR__ . '/../../../../include/rendering/RESTClient.php');
 		if (class_exists('\\RestClient'))
-			$this->rest_client = new \RESTClient();
+			$this->restClient = new \RESTClient();
 		$this->headers = array(
 			'X-Uptrack-User' => $this->apiUsername,
 			'X-Uptrack-Key' => $this->apiKey,
@@ -59,10 +59,10 @@ class Ksplice
 	 * @return void
 	 */
 	public function request() {
-		$this->rest_client->createRequest($this->urlBase . $this->url, $this->method, $this->inputs, $this->headers);
-		$this->rest_client->sendRequest();
-		$this->response_raw = $this->rest_client->getResponse();
-		$this->response = json_decode($this->response_raw);
+		$this->restClient->createRequest($this->urlBase . $this->url, $this->method, $this->inputs, $this->headers);
+		$this->restClient->sendRequest();
+		$this->responseRaw = $this->restClient->getResponse();
+		$this->response = json_decode($this->responseRaw);
 		return $this->response;
 	}
 
@@ -80,7 +80,7 @@ class Ksplice
 			$this->hosts[$data['hostname']] = $data;
 			$this->uuids[$data['uuid']] = $data;
 		}
-		$this->machines_loaded = TRUE;
+		$this->machinesLoaded = TRUE;
 		return $this->response;
 	}
 
@@ -103,7 +103,7 @@ class Ksplice
 	 * @return string|bool
 	 */
 	public function ip_to_uuid($ipAddress) {
-		if (!$this->machines_loaded) {
+		if (!$this->machinesLoaded) {
 			$this->list_machines();
 		}
 		if (isset($this->ips[$ipAddress])) {

@@ -35,7 +35,7 @@ class Plugin {
 			$uuid = $ksplice->ip_to_uuid($license->get_ip());
 			myadmin_log('licenses', 'info', "Got UUID $uuid from IP " . $license->get_ip(), __LINE__, __FILE__);
 			$ksplice->authorize_machine($uuid, TRUE);
-			myadmin_log('licenses', 'info', 'Response: ' . $ksplice->response_raw, __LINE__, __FILE__);
+			myadmin_log('licenses', 'info', 'Response: ' . $ksplice->responseRaw, __LINE__, __FILE__);
 			myadmin_log('licenses', 'info', 'Response: ' . json_encode($ksplice->response), __LINE__, __FILE__);
 			$event->stopPropagation();
 		}
