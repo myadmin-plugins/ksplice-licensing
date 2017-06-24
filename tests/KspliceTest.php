@@ -1,5 +1,6 @@
 <?php
 
+use Detain\MyAdminKsplice\Ksplice;
 use PHPUnit\Framework\TestCase;
 
 /**
