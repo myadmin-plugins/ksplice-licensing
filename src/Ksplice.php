@@ -43,8 +43,10 @@ class Ksplice
 	public function __construct($api_username, $api_key) {
 		$this->api_username = $api_username;
 		$this->api_key = $api_key;
-		include_once(__DIR__ . '/../../../../include/rendering/RESTClient.php');
-		$this->rest_client = new \RESTClient();
+		if (file_exists(__DIR__ . '/../../../../include/rendering/RESTClient.php'))
+			include_once(__DIR__ . '/../../../../include/rendering/RESTClient.php');
+		if (class_exists('\\RestClient'))
+			$this->rest_client = new \RESTClient();
 		$this->headers = array(
 			'X-Uptrack-User' => $this->api_username,
 			'X-Uptrack-Key' => $this->api_key,
