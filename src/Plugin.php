@@ -26,7 +26,6 @@ class Plugin {
 	}
 
 	public static function Activate(GenericEvent $event) {
-		// will be executed when the licenses.license event is dispatched
 		$license = $event->getSubject();
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
 			myadmin_log('licenses', 'info', 'Ksplice Activation', __LINE__, __FILE__);
@@ -74,7 +73,6 @@ class Plugin {
 	}
 
 	public static function getMenu(GenericEvent $event) {
-		// will be executed when the licenses.settings event is dispatched
 		$menu = $event->getSubject();
 		$module = 'licenses';
 		if ($GLOBALS['tf']->ima == 'admin') {
@@ -85,14 +83,12 @@ class Plugin {
 	}
 
 	public static function getRequirements(GenericEvent $event) {
-		// will be executed when the licenses.loader event is dispatched
 		$loader = $event->getSubject();
 		$loader->add_requirement('class.Ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/Ksplice.php');
 		$loader->add_requirement('deactivate_ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/ksplice.inc.php');
 	}
 
 	public static function getSettings(GenericEvent $event) {
-		// will be executed when the licenses.settings event is dispatched
 		$settings = $event->getSubject();
 		$settings->add_text_setting('licenses', 'KSplice', 'ksplice_apiUsername', 'Ksplice API Username:', 'Ksplice API Username', $settings->get_setting('KSPLICE_API_USERNAME'));
 		$settings->add_text_setting('licenses', 'KSplice', 'ksplice_apiKey', 'Ksplice API Key:', 'Ksplice API Key', $settings->get_setting('KSPLICE_API_KEY'));
