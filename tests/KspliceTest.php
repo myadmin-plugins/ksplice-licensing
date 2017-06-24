@@ -19,7 +19,7 @@ class KspliceTest extends TestCase
      */
     protected function setUp()
     {
-        $this->object = new Ksplice;
+        $this->object = new Ksplice(getenv('KSPLICE_API_USERNAME'), getenv('KSPLICE_API_KEY'));
     }
 
     /**
