@@ -26,11 +26,7 @@
 					"reference": "trunk"
 				}
 			}
-		},
-        {
-            "type": "git",
-            "url": "https://github.com/detain/myadmin-ksplice-licensing"
-        }
+		}
     ],
     "require": {
         "php": ">=5.0.0",
