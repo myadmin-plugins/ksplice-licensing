@@ -15,7 +15,7 @@
 /**
  * deactivate a ksplice license
  *
- * @param string $ipAddress_uuid can be either an ip or the uuid from the $license_extra['ksplice_uuid']
+ * @param string $ipAddress_uuid can be either an ip or the uuid from the $serviceExtra['ksplice_uuid']
  */
 function deactivate_ksplice($ipAddress_uuid) {
 	// Deactivate Ksplice
