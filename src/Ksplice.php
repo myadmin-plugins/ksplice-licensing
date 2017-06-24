@@ -23,7 +23,7 @@ class Ksplice
 {
 	private $apiKey;
 	private $apiUsername;
-	private $url_base = 'https://uptrack.api.ksplice.com';
+	private $urlBase = 'https://uptrack.api.ksplice.com';
 	public $url = '';
 	public $method = 'GET';
 	public $headers = [];
@@ -59,7 +59,7 @@ class Ksplice
 	 * @return void
 	 */
 	public function request() {
-		$this->rest_client->createRequest($this->url_base . $this->url, $this->method, $this->inputs, $this->headers);
+		$this->rest_client->createRequest($this->urlBase . $this->url, $this->method, $this->inputs, $this->headers);
 		$this->rest_client->sendRequest();
 		$this->response_raw = $this->rest_client->getResponse();
 		$this->response = json_decode($this->response_raw);
