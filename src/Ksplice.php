@@ -21,8 +21,8 @@ namespace Detain\MyAdminKsplice;
  */
 class Ksplice
 {
-	private $api_key;
-	private $api_username;
+	private $apiKey;
+	private $apiUsername;
 	private $url_base = 'https://uptrack.api.ksplice.com';
 	public $url = '';
 	public $method = 'GET';
@@ -40,16 +40,16 @@ class Ksplice
 	 * Ksplice::__construct()
 	 * @return \Ksplice
 	 */
-	public function __construct($api_username, $api_key) {
-		$this->api_username = $api_username;
-		$this->api_key = $api_key;
+	public function __construct($apiUsername, $apiKey) {
+		$this->apiUsername = $apiUsername;
+		$this->apiKey = $apiKey;
 		if (file_exists(__DIR__ . '/../../../../include/rendering/RESTClient.php'))
 			include_once(__DIR__ . '/../../../../include/rendering/RESTClient.php');
 		if (class_exists('\\RestClient'))
 			$this->rest_client = new \RESTClient();
 		$this->headers = array(
-			'X-Uptrack-User' => $this->api_username,
-			'X-Uptrack-Key' => $this->api_key,
+			'X-Uptrack-User' => $this->apiUsername,
+			'X-Uptrack-Key' => $this->apiKey,
 			'Accept' => 'application/json');
 	}
 
