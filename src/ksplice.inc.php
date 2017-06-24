@@ -15,17 +15,17 @@
 /**
  * deactivate a ksplice license
  *
- * @param string $ipAddress_uuid can be either an ip or the uuid from the $serviceExtra['ksplice_uuid']
+ * @param string $ipAddressUuid can be either an ip or the uuid from the $serviceExtra['ksplice_uuid']
  */
-function deactivate_ksplice($ipAddress_uuid) {
+function deactivate_ksplice($ipAddressUuid) {
 	// Deactivate Ksplice
 	//
 	$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
-	if (valid_ip($ipAddress_uuid, FALSE)) {
-		$uuid = $ksplice->ip_to_uuid($ipAddress_uuid);
-		myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddress_uuid}) Response {$uuid}", __LINE__, __FILE__);
+	if (valid_ip($ipAddressUuid, FALSE)) {
+		$uuid = $ksplice->ip_to_uuid($ipAddressUuid);
+		myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
 	} else
-		$uuid = $ipAddress_uuid;
+		$uuid = $ipAddressUuid;
 	$response = $ksplice->deauthorize_machine($uuid);
-	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddress_uuid}) Response " . json_encode($response), __LINE__, __FILE__);
+	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response " . json_encode($response), __LINE__, __FILE__);
 }
