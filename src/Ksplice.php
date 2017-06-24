@@ -19,8 +19,7 @@ namespace Detain\MyAdminKsplice;
  *
  * @access public
  */
-class Ksplice
-{
+class Ksplice {
 	private $apiKey;
 	private $apiUsername;
 	private $urlBase = 'https://uptrack.api.ksplice.com';
@@ -43,8 +42,8 @@ class Ksplice
 	public function __construct($apiUsername, $apiKey) {
 		$this->apiUsername = $apiUsername;
 		$this->apiKey = $apiKey;
-		if (file_exists(__DIR__ . '/../../../../include/rendering/RESTClient.php'))
-			include_once(__DIR__ . '/../../../../include/rendering/RESTClient.php');
+		if (file_exists(__DIR__.'/../../../../include/rendering/RESTClient.php'))
+			include_once(__DIR__.'/../../../../include/rendering/RESTClient.php');
 		if (class_exists('\\RestClient'))
 			$this->restClient = new \RESTClient();
 		$this->headers = array(
@@ -59,7 +58,7 @@ class Ksplice
 	 * @return void
 	 */
 	public function request() {
-		$this->restClient->createRequest($this->urlBase . $this->url, $this->method, $this->inputs, $this->headers);
+		$this->restClient->createRequest($this->urlBase.$this->url, $this->method, $this->inputs, $this->headers);
 		$this->restClient->sendRequest();
 		$this->responseRaw = $this->restClient->getResponse();
 		$this->response = json_decode($this->responseRaw);
@@ -91,7 +90,7 @@ class Ksplice
 	 * @return void
 	 */
 	public function describe_machine($uuid) {
-		$this->url = '/api/1/machine/' . $uuid . '/describe';
+		$this->url = '/api/1/machine/'.$uuid.'/describe';
 		$this->method = 'GET';
 		return $this->request();
 	}
@@ -121,19 +120,19 @@ class Ksplice
 	 * @return void
 	 */
 	public function authorize_machine($uuid, $authorize = TRUE) {
-		$this->url = '/api/1/machine/' . $uuid . '/authorize';
+		$this->url = '/api/1/machine/'.$uuid.'/authorize';
 		$this->method = 'POST';
 		$this->inputs = json_encode(array('authorized' => $authorize));
 		$this->request();
 		if ($authorize == TRUE)
-			myadmin_log('licenses', 'info', "Authorize Ksplice ({$uuid}, {$authorize}) Response: " . json_encode($this->response), __LINE__, __FILE__);
+			myadmin_log('licenses', 'info', "Authorize Ksplice ({$uuid}, {$authorize}) Response: ".json_encode($this->response), __LINE__, __FILE__);
 		else
-			myadmin_log('licenses', 'info', "Deauthorize Ksplice ({$uuid}, {$authorize}) Response: " . json_encode($this->response), __LINE__, __FILE__);
+			myadmin_log('licenses', 'info', "Deauthorize Ksplice ({$uuid}, {$authorize}) Response: ".json_encode($this->response), __LINE__, __FILE__);
 		return $this->response;
 	}
 
 	/**
-	 * @param $uuid
+	 * @param string|boolean $uuid
 	 */
 	public function deauthorize_machine($uuid) {
 		return $this->authorize_machine($uuid, FALSE);
@@ -147,7 +146,7 @@ class Ksplice
 	 * @return void
 	 */
 	public function change_group($uuid, $groupName = '') {
-		$this->url = '/api/1/machine/' . $uuid . '/group';
+		$this->url = '/api/1/machine/'.$uuid.'/group';
 		$this->method = 'POST';
 		$this->inputs = json_encode(array('group_name' => $groupName));
 		return $this->request();

@@ -27,5 +27,5 @@ function deactivate_ksplice($ipAddressUuid) {
 	} else
 		$uuid = $ipAddressUuid;
 	$response = $ksplice->deauthorize_machine($uuid);
-	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response " . json_encode($response), __LINE__, __FILE__);
+	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response ".json_encode($response), __LINE__, __FILE__);
 }

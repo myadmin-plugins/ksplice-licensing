@@ -33,10 +33,10 @@ class Plugin {
 			activate_ksplice($license->get_ip(), $event['field1']);
 			$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
 			$uuid = $ksplice->ip_to_uuid($license->get_ip());
-			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP " . $license->get_ip(), __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP ".$license->get_ip(), __LINE__, __FILE__);
 			$ksplice->authorize_machine($uuid, TRUE);
-			myadmin_log(self::$module, 'info', 'Response: ' . $ksplice->responseRaw, __LINE__, __FILE__);
-			myadmin_log(self::$module, 'info', 'Response: ' . json_encode($ksplice->response), __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Response: '.$ksplice->responseRaw, __LINE__, __FILE__);
+			myadmin_log(self::$module, 'info', 'Response: '.json_encode($ksplice->response), __LINE__, __FILE__);
 			$event->stopPropagation();
 		}
 	}
@@ -91,7 +91,7 @@ class Plugin {
 		$settings = $event->getSubject();
 		$settings->add_text_setting(self::$module, 'KSplice', 'ksplice_apiUsername', 'Ksplice API Username:', 'Ksplice API Username', $settings->get_setting('KSPLICE_API_USERNAME'));
 		$settings->add_text_setting(self::$module, 'KSplice', 'ksplice_apiKey', 'Ksplice API Key:', 'Ksplice API Key', $settings->get_setting('KSPLICE_API_KEY'));
-		$settings->add_dropdown_setting(self::$module, 'KSplice', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes', ));
+		$settings->add_dropdown_setting(self::$module, 'KSplice', 'outofstock_licenses_ksplice', 'Out Of Stock Ksplice Licenses', 'Enable/Disable Sales Of This Type', $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), array('0', '1'), array('No', 'Yes',));
 	}
 
 }
