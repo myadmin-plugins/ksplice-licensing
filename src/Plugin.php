@@ -19,9 +19,9 @@ class Plugin {
 	public static function getHooks() {
 		return [
 			'function.requirements' => [__CLASS__, 'getRequirements'],
-			'licenses.settings' => [__CLASS__, 'getSettings'],
-			'licenses.activate' => [__CLASS__, 'getActivate'],
-			'licenses.deactivate' => [__CLASS__, 'Deactivate'],
+			self::$module.'.settings' => [__CLASS__, 'getSettings'],
+			self::$module.'.activate' => [__CLASS__, 'getActivate'],
+			self::$module.'.deactivate' => [__CLASS__, 'Deactivate'],
 		];
 	}
 
@@ -74,11 +74,10 @@ class Plugin {
 
 	public static function getMenu(GenericEvent $event) {
 		$menu = $event->getSubject();
-		$module = 'licenses';
 		if ($GLOBALS['tf']->ima == 'admin') {
-			$menu->add_link($module, 'choice=none.reusable_ksplice', 'icons/database_warning_48.png', 'ReUsable Ksplice Licenses');
-			$menu->add_link($module, 'choice=none.ksplice_list', 'icons/database_warning_48.png', 'Ksplice Licenses Breakdown');
-			$menu->add_link($module.'api', 'choice=none.ksplice_licenses_list', 'whm/createacct.gif', 'List all Ksplice Licenses');
+			$menu->add_link(self::$module, 'choice=none.reusable_ksplice', 'icons/database_warning_48.png', 'ReUsable Ksplice Licenses');
+			$menu->add_link(self::$module, 'choice=none.ksplice_list', 'icons/database_warning_48.png', 'Ksplice Licenses Breakdown');
+			$menu->add_link(self::$module.'api', 'choice=none.ksplice_licenses_list', 'whm/createacct.gif', 'List all Ksplice Licenses');
 		}
 	}
 
