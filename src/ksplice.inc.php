@@ -21,7 +21,7 @@ function deactivate_ksplice($ipAddressUuid) {
 	// Deactivate Ksplice
 	//
 	$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
-	if (valid_ip($ipAddressUuid, FALSE)) {
+	if (validIp($ipAddressUuid, FALSE)) {
 		$uuid = $ksplice->ip_to_uuid($ipAddressUuid);
 		myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
 	} else
