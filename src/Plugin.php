@@ -21,6 +21,7 @@ class Plugin {
 			'function.requirements' => [__CLASS__, 'getRequirements'],
 			self::$module.'.settings' => [__CLASS__, 'getSettings'],
 			self::$module.'.activate' => [__CLASS__, 'getActivate'],
+			self::$module.'.reactivate' => [__CLASS__, 'getActivate'],
 			self::$module.'.deactivate' => [__CLASS__, 'getDeactivate'],
 		];
 	}
