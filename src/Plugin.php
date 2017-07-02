@@ -31,10 +31,10 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
 			myadmin_log(self::$module, 'info', 'Ksplice Activation', __LINE__, __FILE__);
 			function_requirements('activate_ksplice');
-			activate_ksplice($serviceClass->get_ip(), $event['field1']);
+			activate_ksplice($serviceClass->getIp(), $event['field1']);
 			$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
-			$uuid = $ksplice->ip_to_uuid($serviceClass->get_ip());
-			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP ".$serviceClass->get_ip(), __LINE__, __FILE__);
+			$uuid = $ksplice->ip_to_uuid($serviceClass->getIp());
+			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP ".$serviceClass->getIp(), __LINE__, __FILE__);
 			$ksplice->authorize_machine($uuid, TRUE);
 			myadmin_log(self::$module, 'info', 'Response: '.$ksplice->responseRaw, __LINE__, __FILE__);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($ksplice->response), __LINE__, __FILE__);
@@ -47,7 +47,7 @@ class Plugin {
 		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
 			myadmin_log(self::$module, 'info', 'Ksplice Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_ksplice');
-			deactivate_ksplice($serviceClass->get_ip());
+			deactivate_ksplice($serviceClass->getIp());
 			$event->stopPropagation();
 		}
 	}
@@ -57,14 +57,14 @@ class Plugin {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			$ksplice = new Ksplice(KSPLICE_USERNAME, KSPLICE_PASSWORD);
-			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$serviceClass->get_ip().") (NEW:{$event['newip']})", __LINE__, __FILE__);
-			$result = $ksplice->editIp($serviceClass->get_ip(), $event['newip']);
+			myadmin_log(self::$module, 'info', "IP Change - (OLD:".$serviceClass->getIp().") (NEW:{$event['newip']})", __LINE__, __FILE__);
+			$result = $ksplice->editIp($serviceClass->getIp(), $event['newip']);
 			if (isset($result['faultcode'])) {
-				myadmin_log(self::$module, 'error', 'Ksplice editIp('.$serviceClass->get_ip().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
+				myadmin_log(self::$module, 'error', 'Ksplice editIp('.$serviceClass->getIp().', '.$event['newip'].') returned Fault '.$result['faultcode'].': '.$result['fault'], __LINE__, __FILE__);
 				$event['status'] = 'error';
 				$event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
 			} else {
-				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->get_ip());
+				$GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getIp());
 				$serviceClass->set_ip($event['newip'])->save();
 				$event['status'] = 'ok';
 				$event['status_text'] = 'The IP Address has been changed.';
