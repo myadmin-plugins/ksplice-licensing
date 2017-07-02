@@ -43,7 +43,7 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * @covers Detain\MyAdminKsplice\Ksplice::list_machines
+     * @covers Detain\MyAdminKsplice\Ksplice::listMachines
      * @todo   Implement testList_machines().
      */
     public function testList_machines()
@@ -55,7 +55,7 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * @covers Detain\MyAdminKsplice\Ksplice::describe_machine
+     * @covers Detain\MyAdminKsplice\Ksplice::describeMachine
      * @todo   Implement testDescribe_machine().
      */
     public function testDescribe_machine()
@@ -67,7 +67,7 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * @covers Detain\MyAdminKsplice\Ksplice::ip_to_uuid
+     * @covers Detain\MyAdminKsplice\Ksplice::ipToUuid
      * @todo   Implement testIp_to_uuid().
      */
     public function testIp_to_uuid()
@@ -79,7 +79,7 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * @covers Detain\MyAdminKsplice\Ksplice::authorize_machine
+     * @covers Detain\MyAdminKsplice\Ksplice::authorizeMachine
      * @todo   Implement testAuthorize_machine().
      */
     public function testAuthorize_machine()
@@ -91,10 +91,10 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * @covers Detain\MyAdminKsplice\Ksplice::deauthorize_machine
-     * @todo   Implement testDeauthorize_machine().
+     * @covers Detain\MyAdminKsplice\Ksplice::deauthorizeMachine
+     * @todo   Implement testDeauthorizeMachine().
      */
-    public function testDeauthorize_machine()
+    public function testDeauthorizeMachine()
     {
         // Remove the following lines when you implement this test.
         $this->markTestIncomplete(
@@ -103,7 +103,7 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * @covers Detain\MyAdminKsplice\Ksplice::change_group
+     * @covers Detain\MyAdminKsplice\Ksplice::changeGroup
      * @todo   Implement testChange_group().
      */
     public function testChange_group()

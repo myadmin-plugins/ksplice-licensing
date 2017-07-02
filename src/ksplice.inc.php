@@ -22,10 +22,10 @@ function deactivate_ksplice($ipAddressUuid) {
 	//
 	$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
 	if (validIp($ipAddressUuid, FALSE)) {
-		$uuid = $ksplice->ip_to_uuid($ipAddressUuid);
+		$uuid = $ksplice->ipToUuid($ipAddressUuid);
 		myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
 	} else
 		$uuid = $ipAddressUuid;
-	$response = $ksplice->deauthorize_machine($uuid);
+	$response = $ksplice->deauthorizeMachine($uuid);
 	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response ".json_encode($response), __LINE__, __FILE__);
 }

@@ -33,9 +33,9 @@ class Plugin {
 			function_requirements('activate_ksplice');
 			activate_ksplice($serviceClass->getIp(), $event['field1']);
 			$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
-			$uuid = $ksplice->ip_to_uuid($serviceClass->getIp());
+			$uuid = $ksplice->ipToUuid($serviceClass->getIp());
 			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP ".$serviceClass->getIp(), __LINE__, __FILE__);
-			$ksplice->authorize_machine($uuid, TRUE);
+			$ksplice->authorizeMachine($uuid, TRUE);
 			myadmin_log(self::$module, 'info', 'Response: '.$ksplice->responseRaw, __LINE__, __FILE__);
 			myadmin_log(self::$module, 'info', 'Response: '.json_encode($ksplice->response), __LINE__, __FILE__);
 			$event->stopPropagation();

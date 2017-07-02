@@ -66,15 +66,16 @@ class Ksplice {
 	}
 
 	/**
-	 * Ksplice::list_machines()
+	 * Ksplice::listMachines()
 	 *
 	 * @return void
 	 */
-	public function list_machines() {
+	public function listMachines() {
 		$this->url = '/api/1/machines';
 		$this->method = 'GET';
 		$machines = obj2array($this->request());
-		foreach ($machines as $idx => $data) {
+		$machinesValues = array_values($machines);
+		foreach ($machinesValues as $data) {
 			$this->ips[$data['ip']] = $data;
 			$this->hosts[$data['hostname']] = $data;
 			$this->uuids[$data['uuid']] = $data;
@@ -84,26 +85,26 @@ class Ksplice {
 	}
 
 	/**
-	 * Ksplice::describe_machine()
+	 * Ksplice::describeMachine()
 	 *
 	 * @param mixed $uuid
 	 * @return void
 	 */
-	public function describe_machine($uuid) {
+	public function describeMachine($uuid) {
 		$this->url = '/api/1/machine/'.$uuid.'/describe';
 		$this->method = 'GET';
 		return $this->request();
 	}
 
 	/**
-	 * Ksplice::ip_to_uuid()
+	 * Ksplice::ipToUuid()
 	 *
 	 * @param mixed $ipAddress
 	 * @return string|bool
 	 */
-	public function ip_to_uuid($ipAddress) {
+	public function ipToUuid($ipAddress) {
 		if (!$this->machinesLoaded) {
-			$this->list_machines();
+			$this->listMachines();
 		}
 		if (isset($this->ips[$ipAddress])) {
 			return $this->ips[$ipAddress]['uuid'];
@@ -113,13 +114,13 @@ class Ksplice {
 	}
 
 	/**
-	 * Ksplice::authorize_machine()
+	 * Ksplice::authorizeMachine()
 	 *
 	 * @param mixed $uuid
 	 * @param bool $authorize
 	 * @return void
 	 */
-	public function authorize_machine($uuid, $authorize = TRUE) {
+	public function authorizeMachine($uuid, $authorize = TRUE) {
 		$this->url = '/api/1/machine/'.$uuid.'/authorize';
 		$this->method = 'POST';
 		$this->inputs = json_encode(array('authorized' => $authorize));
@@ -134,18 +135,18 @@ class Ksplice {
 	/**
 	 * @param string|boolean $uuid
 	 */
-	public function deauthorize_machine($uuid) {
-		return $this->authorize_machine($uuid, FALSE);
+	public function deauthorizeMachine($uuid) {
+		return $this->authorizeMachine($uuid, FALSE);
 	}
 
 	/**
-	 * Ksplice::change_group()
+	 * Ksplice::changeGroup()
 	 *
 	 * @param mixed $uuid
 	 * @param string $groupName
 	 * @return void
 	 */
-	public function change_group($uuid, $groupName = '') {
+	public function changeGroup($uuid, $groupName = '') {
 		$this->url = '/api/1/machine/'.$uuid.'/group';
 		$this->method = 'POST';
 		$this->inputs = json_encode(array('group_name' => $groupName));
