@@ -29,7 +29,7 @@ class Plugin {
 
 	public static function getActivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
+		if ($event['category'] == get_service_define('KSPLICE')) {
 			myadmin_log(self::$module, 'info', 'Ksplice Activation', __LINE__, __FILE__);
 			function_requirements('activate_ksplice');
 			activate_ksplice($serviceClass->getIp(), $event['field1']);
@@ -45,7 +45,7 @@ class Plugin {
 
 	public static function getDeactivate(GenericEvent $event) {
 		$serviceClass = $event->getSubject();
-		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
+		if ($event['category'] == get_service_define('KSPLICE')) {
 			myadmin_log(self::$module, 'info', 'Ksplice Deactivation', __LINE__, __FILE__);
 			function_requirements('deactivate_ksplice');
 			deactivate_ksplice($serviceClass->getIp());
@@ -54,7 +54,7 @@ class Plugin {
 	}
 
 	public static function getChangeIp(GenericEvent $event) {
-		if ($event['category'] == SERVICE_TYPES_KSPLICE) {
+		if ($event['category'] == get_service_define('KSPLICE')) {
 			$serviceClass = $event->getSubject();
 			$settings = get_module_settings(self::$module);
 			$ksplice = new Ksplice(KSPLICE_USERNAME, KSPLICE_PASSWORD);
