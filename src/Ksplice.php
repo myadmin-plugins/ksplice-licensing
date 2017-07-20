@@ -36,7 +36,9 @@ class Ksplice {
 
 	/**
 	 * Ksplice::__construct()
-	 * @return \Ksplice
+	 *
+	 * @param $apiUsername
+	 * @param $apiKey
 	 */
 	public function __construct($apiUsername, $apiKey) {
 		$this->apiUsername = $apiUsername;
