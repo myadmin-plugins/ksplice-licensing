@@ -47,10 +47,11 @@ class Ksplice {
 			include_once(__DIR__.'/../../../../include/rendering/RESTClient.php');
 		if (class_exists('\\RestClient'))
 			$this->restClient = new \RESTClient();
-		$this->headers = array(
+		$this->headers = [
 			'X-Uptrack-User' => $this->apiUsername,
 			'X-Uptrack-Key' => $this->apiKey,
-			'Accept' => 'application/json');
+			'Accept' => 'application/json'
+		];
 	}
 
 	/**
@@ -124,7 +125,7 @@ class Ksplice {
 	public function authorizeMachine($uuid, $authorize = TRUE) {
 		$this->url = '/api/1/machine/'.$uuid.'/authorize';
 		$this->method = 'POST';
-		$this->inputs = json_encode(array('authorized' => $authorize));
+		$this->inputs = json_encode(['authorized' => $authorize]);
 		$this->request();
 		if ($authorize == TRUE)
 			myadmin_log('licenses', 'info', "Authorize Ksplice ({$uuid}, {$authorize}) Response: ".json_encode($this->response), __LINE__, __FILE__);
@@ -150,7 +151,7 @@ class Ksplice {
 	public function changeGroup($uuid, $groupName = '') {
 		$this->url = '/api/1/machine/'.$uuid.'/group';
 		$this->method = 'POST';
-		$this->inputs = json_encode(array('group_name' => $groupName));
+		$this->inputs = json_encode(['group_name' => $groupName]);
 		return $this->request();
 	}
 
