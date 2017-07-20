@@ -44,7 +44,7 @@ class Ksplice {
 		$this->apiUsername = $apiUsername;
 		$this->apiKey = $apiKey;
 		if (file_exists(__DIR__.'/../../../../include/rendering/RESTClient.php'))
-			include_once(__DIR__.'/../../../../include/rendering/RESTClient.php');
+			include_once __DIR__.'/../../../../include/rendering/RESTClient.php';
 		if (class_exists('\\RestClient'))
 			$this->restClient = new \RESTClient();
 		$this->headers = [
