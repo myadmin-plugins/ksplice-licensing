@@ -70,7 +70,7 @@ class Ksplice {
 	/**
 	 * Ksplice::listMachines()
 	 *
-	 * @return void
+	 * @return array
 	 */
 	public function listMachines() {
 		$this->url = '/api/1/machines';
@@ -120,7 +120,7 @@ class Ksplice {
 	 *
 	 * @param mixed $uuid
 	 * @param bool $authorize
-	 * @return void
+	 * @return array
 	 */
 	public function authorizeMachine($uuid, $authorize = TRUE) {
 		$this->url = '/api/1/machine/'.$uuid.'/authorize';
