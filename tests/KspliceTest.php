@@ -8,109 +8,109 @@ use PHPUnit\Framework\TestCase;
  */
 class KspliceTest extends TestCase
 {
-    /**
-     * @var Ksplice
-     */
-    protected $object;
+	/**
+	 * @var Ksplice
+	 */
+	protected $object;
 
-    /**
-     * Sets up the fixture, for example, opens a network connection.
-     * This method is called before a test is executed.
-     */
-    protected function setUp()
-    {
-        $this->object = new Ksplice(getenv('KSPLICE_API_USERNAME'), getenv('KSPLICE_API_KEY'));
-    }
+	/**
+	 * Sets up the fixture, for example, opens a network connection.
+	 * This method is called before a test is executed.
+	 */
+	protected function setUp()
+	{
+		$this->object = new Ksplice(getenv('KSPLICE_API_USERNAME'), getenv('KSPLICE_API_KEY'));
+	}
 
-    /**
-     * Tears down the fixture, for example, closes a network connection.
-     * This method is called after a test is executed.
-     */
-    protected function tearDown()
-    {
-    }
+	/**
+	 * Tears down the fixture, for example, closes a network connection.
+	 * This method is called after a test is executed.
+	 */
+	protected function tearDown()
+	{
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::request
-     * @todo   Implement testRequest().
-     */
-    public function testRequest()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::request
+	 * @todo   Implement testRequest().
+	 */
+	public function testRequest()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::listMachines
-     * @todo   Implement testList_machines().
-     */
-    public function testList_machines()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::listMachines
+	 * @todo   Implement testList_machines().
+	 */
+	public function testList_machines()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::describeMachine
-     * @todo   Implement testDescribe_machine().
-     */
-    public function testDescribe_machine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::describeMachine
+	 * @todo   Implement testDescribe_machine().
+	 */
+	public function testDescribe_machine()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::ipToUuid
-     * @todo   Implement testIp_to_uuid().
-     */
-    public function testIp_to_uuid()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::ipToUuid
+	 * @todo   Implement testIp_to_uuid().
+	 */
+	public function testIp_to_uuid()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::authorizeMachine
-     * @todo   Implement testAuthorize_machine().
-     */
-    public function testAuthorize_machine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::authorizeMachine
+	 * @todo   Implement testAuthorize_machine().
+	 */
+	public function testAuthorize_machine()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::deauthorizeMachine
-     * @todo   Implement testDeauthorizeMachine().
-     */
-    public function testDeauthorizeMachine()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::deauthorizeMachine
+	 * @todo   Implement testDeauthorizeMachine().
+	 */
+	public function testDeauthorizeMachine()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 
-    /**
-     * @covers Detain\MyAdminKsplice\Ksplice::changeGroup
-     * @todo   Implement testChange_group().
-     */
-    public function testChange_group()
-    {
-        // Remove the following lines when you implement this test.
-        $this->markTestIncomplete(
-            'This test has not been implemented yet.'
-        );
-    }
+	/**
+	 * @covers Detain\MyAdminKsplice\Ksplice::changeGroup
+	 * @todo   Implement testChange_group().
+	 */
+	public function testChange_group()
+	{
+		// Remove the following lines when you implement this test.
+		$this->markTestIncomplete(
+			'This test has not been implemented yet.'
+		);
+	}
 }
