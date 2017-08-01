@@ -1,27 +1,31 @@
 {
-    "name": "detain/myadmin-ksplice-licensing",
+    "name": "detain\/myadmin-ksplice-licensing",
     "type": "myadmin-plugin",
     "description": "Ksplice Licensing Class",
-    "keywords": ["ksplice","administration","license"],
+    "keywords": [
+        "ksplice",
+        "administration",
+        "license"
+    ],
     "license": "LGPL-2.1",
     "authors": [
         {
             "name": "Joe Huss",
-            "homepage": "https://my.interserver.net/"
+            "homepage": "https:\/\/my.interserver.net\/"
         }
     ],
     "config": {
-        "bin-dir": "vendor/bin",
+        "bin-dir": "vendor\/bin",
         "minimum-stability": "dev"
     },
     "repositories": [
         {
             "type": "package",
             "package": {
-                "name": "pear/HTTP_Request",
+                "name": "pear\/HTTP_Request",
                 "version": "trunk",
                 "source": {
-                    "url": "https://github.com/pear/HTTP_Request.git",
+                    "url": "https:\/\/github.com\/pear\/HTTP_Request.git",
                     "type": "git",
                     "reference": "trunk"
                 }
@@ -30,18 +34,21 @@
     ],
     "require": {
         "php": ">=5.0.0",
-    "pear/HTTP_Request": "dev-trunk",
-    "symfony/event-dispatcher": "*",
-    "detain/myadmin-plugin-installer": "dev-master"
+        "pear\/HTTP_Request": "dev-trunk",
+        "symfony\/event-dispatcher": "*",
+        "detain\/myadmin-plugin-installer": "dev-master",
+        "roave\/security-advisories": "dev-master"
     },
     "require-dev": {
-        "phpunit/phpunit": "*",
-        "vlucas/phpdotenv": "*",
-        "codeclimate/php-test-reporter": "dev-master",
-        "satooshi/php-coveralls": "*",
-        "codacy/coverage": "dev-master"
+        "phpunit\/phpunit": "*",
+        "vlucas\/phpdotenv": "*",
+        "codeclimate\/php-test-reporter": "dev-master",
+        "satooshi\/php-coveralls": "*",
+        "codacy\/coverage": "dev-master"
     },
     "autoload": {
-        "psr-4": {"Detain\\MyAdminKsplice\\": "src/"}
+        "psr-4": {
+            "Detain\\MyAdminKsplice\\": "src\/"
+        }
     }
 }
