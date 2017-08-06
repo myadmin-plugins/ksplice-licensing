@@ -136,6 +136,7 @@ class Ksplice {
 
 	/**
 	 * @param string|boolean $uuid
+	 * @return array
 	 */
 	public function deauthorizeMachine($uuid) {
 		return $this->authorizeMachine($uuid, FALSE);

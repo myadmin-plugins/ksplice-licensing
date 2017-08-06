@@ -29,6 +29,9 @@ function deactivate_ksplice($ipAddressUuid) {
 	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response ".json_encode($response), __LINE__, __FILE__);
 }
 
+/**
+ * @param $ipAddressUuid
+ */
 function activate_ksplice($ipAddressUuid) {
 	// Deactivate Ksplice
 	//
