@@ -45,7 +45,7 @@ class Plugin {
 		if ($event['category'] == get_service_define('KSPLICE')) {
 			myadmin_log(self::$module, 'info', 'Ksplice Activation', __LINE__, __FILE__);
 			function_requirements('activate_ksplice');
-			activate_ksplice($serviceClass->getIp(), $event['field1']);
+			activate_ksplice($serviceClass->getIp());
 			$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
 			$uuid = $ksplice->ipToUuid($serviceClass->getIp());
 			myadmin_log(self::$module, 'info', "Got UUID $uuid from IP ".$serviceClass->getIp(), __LINE__, __FILE__);
