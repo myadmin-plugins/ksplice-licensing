@@ -4,8 +4,7 @@
  *
  * API Documentation at http://www.ksplice.com/uptrack/api
  *
- * Last Changed: $LastChangedDate: 2017-05-31 17:13:05 -0400 (Wed, 31 May 2017) $
- * @author detain
+ * @author Joe Huss <detain@interserver.net>
  * @copyright 2017
  * @package MyAdmin
  * @category Licenses
