@@ -48,7 +48,7 @@
     },
     "autoload": {
         "psr-4": {
-            "Detain\\MyAdminKsplice\\": "src\/"
+            "Detain\\MyAdminKsplice\\": "src/"
         }
     }
 }
