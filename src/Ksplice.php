@@ -42,8 +42,7 @@ class Ksplice {
 	public function __construct($apiUsername, $apiKey) {
 		$this->apiUsername = $apiUsername;
 		$this->apiKey = $apiKey;
-		if (file_exists(__DIR__.'/../../../../include/rendering/RESTClient.php'))
-			include_once __DIR__.'/../../../../include/rendering/RESTClient.php';
+		function_requirements('class.RESTClient');
 		if (class_exists('\\RestClient'))
 			$this->restClient = new \RESTClient();
 		$this->headers = [
