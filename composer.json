@@ -34,7 +34,7 @@
     ],
     "require": {
         "php": ">=5.0.0",
-        "pear/HTTP_Request": "*",
+        "pear/HTTP_Request": "dev-trunk",
         "symfony/event-dispatcher": "*",
         "detain/myadmin-plugin-installer": "dev-master",
         "roave/security-advisories": "dev-master"
