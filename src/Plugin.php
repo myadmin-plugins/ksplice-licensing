@@ -44,7 +44,7 @@ class Plugin {
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('KSPLICE')) {
 			myadmin_log(self::$module, 'info', 'Ksplice Activation', __LINE__, __FILE__);
-			function_requirements('activate_ksplice');
+			\function_requirements('activate_ksplice');
 			activate_ksplice($serviceClass->getIp());
 			$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
 			$uuid = $ksplice->ipToUuid($serviceClass->getIp());
@@ -63,7 +63,7 @@ class Plugin {
 		$serviceClass = $event->getSubject();
 		if ($event['category'] == get_service_define('KSPLICE')) {
 			myadmin_log(self::$module, 'info', 'Ksplice Deactivation', __LINE__, __FILE__);
-			function_requirements('deactivate_ksplice');
+			\function_requirements('deactivate_ksplice');
 			deactivate_ksplice($serviceClass->getIp());
 			$event->stopPropagation();
 		}
