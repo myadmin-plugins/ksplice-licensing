@@ -101,7 +101,7 @@ class Plugin {
 		if ($GLOBALS['tf']->ima == 'admin') {
 			$menu->add_link(self::$module, 'choice=none.reusable_ksplice', 'images/icons/database_warning_48.png', 'ReUsable Ksplice Licenses');
 			$menu->add_link(self::$module, 'choice=none.ksplice_list', 'images/icons/database_warning_48.png', 'Ksplice Licenses Breakdown');
-			$menu->add_link(self::$module.'api', 'choice=none.ksplice_licenses_list', 'whm/createacct.gif', 'List all Ksplice Licenses');
+			$menu->add_link(self::$module.'api', 'choice=none.ksplice_licenses_list', '/images/whm/createacct.gif', 'List all Ksplice Licenses');
 		}
 	}
 
