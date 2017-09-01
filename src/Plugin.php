@@ -111,7 +111,7 @@ class Plugin {
 	public static function getRequirements(GenericEvent $event) {
 		$loader = $event->getSubject();
 		$loader->add_requirement('class.RESTClient', '/../vendor/detain/myadmin-ksplice-licensing/src/RESTClient.php');
-		$loader->add_requirement('class.Ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/Ksplice.php');
+		$loader->add_requirement('class.Ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/Ksplice.php', '\\Detain\\MyAdminKsplice\\');
 		$loader->add_requirement('deactivate_ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/ksplice.inc.php');
 		$loader->add_requirement('activate_ksplice', '/../vendor/detain/myadmin-ksplice-licensing/src/ksplice.inc.php');
 	}
