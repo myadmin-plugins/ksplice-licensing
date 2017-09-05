@@ -56,13 +56,11 @@ class RESTClient
 		$this->curr_url = $url;
 		$this->req = new HTTP_Request($url);
 		if (is_array($headers)) {
-			foreach ($headers as $key => $value) {
+			foreach ($headers as $key => $value)
 				$this->req->addHeader($key, $value);
-			}
 		}
-		if ($this->user_name != '' && $this->password != '') {
+		if ($this->user_name != '' && $this->password != '')
 			$this->req->setBasicAuth($this->user_name, $this->password);
-		}
 
 		switch ($method) {
 			case 'GET':

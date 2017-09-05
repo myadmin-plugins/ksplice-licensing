@@ -103,9 +103,8 @@ class Ksplice {
 	 * @return string|bool
 	 */
 	public function ipToUuid($ipAddress) {
-		if (!$this->machinesLoaded) {
+		if (!$this->machinesLoaded)
 			$this->listMachines();
-		}
 		if (isset($this->ips[$ipAddress])) {
 			return $this->ips[$ipAddress]['uuid'];
 		} else {
