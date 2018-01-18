@@ -24,5 +24,5 @@ composer require detain/myadmin-ksplice-licensing
 
 ## License
 
-The Ksplice Licensing Class class is licensed under the LGPL-v2 license.
+The Ksplice Licensing Class class is licensed under the LGPL-v2.1 license.
 
