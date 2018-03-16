@@ -5,7 +5,7 @@
  * API Documentation at http://www.ksplice.com/uptrack/api
  *
  * @author Joe Huss <detain@interserver.net>
- * @copyright 2017
+ * @copyright 2018
  * @package MyAdmin
  * @category Licenses
  */
