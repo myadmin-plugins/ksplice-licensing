@@ -17,7 +17,8 @@ namespace Detain\MyAdminKsplice;
  *
  * @access public
  */
-class Ksplice {
+class Ksplice
+{
 	private $apiKey;
 	private $apiUsername;
 	private $urlBase = 'https://uptrack.api.ksplice.com';
@@ -28,7 +29,7 @@ class Ksplice {
 	public $responseRaw = '';
 	public $response = [];
 	private $restClient;
-	public $machinesLoaded = FALSE;
+	public $machinesLoaded = false;
 	public $ips = [];
 	public $hosts = [];
 	public $uuids = [];
@@ -39,12 +40,14 @@ class Ksplice {
 	 * @param $apiUsername
 	 * @param $apiKey
 	 */
-	public function __construct($apiUsername, $apiKey) {
+	public function __construct($apiUsername, $apiKey)
+	{
 		$this->apiUsername = $apiUsername;
 		$this->apiKey = $apiKey;
 		\function_requirements('class.RESTClient');
-		if (class_exists('\\RestClient'))
+		if (class_exists('\\RestClient')) {
 			$this->restClient = new \RESTClient();
+		}
 		$this->headers = [
 			'X-Uptrack-User' => $this->apiUsername,
 			'X-Uptrack-Key' => $this->apiKey,
@@ -57,7 +60,8 @@ class Ksplice {
 	 *
 	 * @return void
 	 */
-	public function request() {
+	public function request()
+	{
 		$this->restClient->createRequest($this->urlBase.$this->url, $this->method, $this->inputs, $this->headers);
 		$this->restClient->sendRequest();
 		$this->responseRaw = $this->restClient->getResponse();
@@ -70,7 +74,8 @@ class Ksplice {
 	 *
 	 * @return array
 	 */
-	public function listMachines() {
+	public function listMachines()
+	{
 		$this->url = '/api/1/machines';
 		$this->method = 'GET';
 		$machines = obj2array($this->request());
@@ -80,7 +85,7 @@ class Ksplice {
 			$this->hosts[$data['hostname']] = $data;
 			$this->uuids[$data['uuid']] = $data;
 		}
-		$this->machinesLoaded = TRUE;
+		$this->machinesLoaded = true;
 		return $this->response;
 	}
 
@@ -90,7 +95,8 @@ class Ksplice {
 	 * @param mixed $uuid
 	 * @return void
 	 */
-	public function describeMachine($uuid) {
+	public function describeMachine($uuid)
+	{
 		$this->url = '/api/1/machine/'.$uuid.'/describe';
 		$this->method = 'GET';
 		return $this->request();
@@ -102,13 +108,15 @@ class Ksplice {
 	 * @param mixed $ipAddress
 	 * @return string|bool
 	 */
-	public function ipToUuid($ipAddress) {
-		if (!$this->machinesLoaded)
+	public function ipToUuid($ipAddress)
+	{
+		if (!$this->machinesLoaded) {
 			$this->listMachines();
+		}
 		if (isset($this->ips[$ipAddress])) {
 			return $this->ips[$ipAddress]['uuid'];
 		} else {
-			return FALSE;
+			return false;
 		}
 	}
 
@@ -119,15 +127,17 @@ class Ksplice {
 	 * @param bool $authorize
 	 * @return array
 	 */
-	public function authorizeMachine($uuid, $authorize = TRUE) {
+	public function authorizeMachine($uuid, $authorize = true)
+	{
 		$this->url = '/api/1/machine/'.$uuid.'/authorize';
 		$this->method = 'POST';
 		$this->inputs = json_encode(['authorized' => $authorize]);
 		$this->request();
-		if ($authorize == TRUE)
+		if ($authorize == true) {
 			myadmin_log('licenses', 'info', "Authorize Ksplice ({$uuid}, {$authorize}) Response: ".json_encode($this->response), __LINE__, __FILE__);
-		else
+		} else {
 			myadmin_log('licenses', 'info', "Deauthorize Ksplice ({$uuid}, {$authorize}) Response: ".json_encode($this->response), __LINE__, __FILE__);
+		}
 		return $this->response;
 	}
 
@@ -135,8 +145,9 @@ class Ksplice {
 	 * @param string|boolean $uuid
 	 * @return array
 	 */
-	public function deauthorizeMachine($uuid) {
-		return $this->authorizeMachine($uuid, FALSE);
+	public function deauthorizeMachine($uuid)
+	{
+		return $this->authorizeMachine($uuid, false);
 	}
 
 	/**
@@ -146,11 +157,11 @@ class Ksplice {
 	 * @param string $groupName
 	 * @return void
 	 */
-	public function changeGroup($uuid, $groupName = '') {
+	public function changeGroup($uuid, $groupName = '')
+	{
 		$this->url = '/api/1/machine/'.$uuid.'/group';
 		$this->method = 'POST';
 		$this->inputs = json_encode(['group_name' => $groupName]);
 		return $this->request();
 	}
-
 }

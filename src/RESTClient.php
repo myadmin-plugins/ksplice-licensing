@@ -17,7 +17,6 @@ require_once INCLUDE_ROOT.'/../vendor/pear/HTTP_Request/Request.php';
  */
 class RESTClient
 {
-
 	private $root_url = '';
 	private $curr_url = '';
 	private $user_name = '';
@@ -33,7 +32,8 @@ class RESTClient
 	 * @param string $password
 	 * @return \RESTClient
 	 */
-	public function __construct($root_url = '', $user_name = '', $password = '') {
+	public function __construct($root_url = '', $user_name = '', $password = '')
+	{
 		$this->root_url = $this->curr_url = $root_url;
 		$this->user_name = $user_name;
 		$this->password = $password;
@@ -52,15 +52,18 @@ class RESTClient
 	 * @param mixed $headers
 	 * @return void
 	 */
-	public function createRequest($url, $method, $arr = null, $headers = null) {
+	public function createRequest($url, $method, $arr = null, $headers = null)
+	{
 		$this->curr_url = $url;
 		$this->req = new HTTP_Request($url);
 		if (is_array($headers)) {
-			foreach ($headers as $key => $value)
+			foreach ($headers as $key => $value) {
 				$this->req->addHeader($key, $value);
+			}
 		}
-		if ($this->user_name != '' && $this->password != '')
+		if ($this->user_name != '' && $this->password != '') {
 			$this->req->setBasicAuth($this->user_name, $this->password);
+		}
 
 		switch ($method) {
 			case 'GET':
@@ -87,7 +90,8 @@ class RESTClient
 	 *
 	 * @return void
 	 */
-	public function sendRequest() {
+	public function sendRequest()
+	{
 		$this->response = $this->req->sendRequest();
 
 		if (PEAR::isError($this->response)) {
@@ -103,8 +107,8 @@ class RESTClient
 	 *
 	 * @return string
 	 */
-	public function getResponse() {
+	public function getResponse()
+	{
 		return $this->responseBody;
 	}
-
 }
