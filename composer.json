@@ -1,5 +1,5 @@
 {
-	"name": "detain/myadmin-ksplice-licensing",
+	"name": "detain/ksplice-licensing",
 	"type": "myadmin-plugin",
 	"description": "Ksplice Licensing Class",
 	"keywords": [
