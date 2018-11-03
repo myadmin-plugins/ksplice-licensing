@@ -11,11 +11,11 @@
 	"authors": [
 		{
 			"name": "Joe Huss",
-			"homepage": "https:\/\/my.interserver.net\/"
+			"homepage": "https://my.interserver.net/"
 		}
 	],
 	"config": {
-		"bin-dir": "vendor\/bin",
+		"bin-dir": "vendor/bin",
 		"minimum-stability": "dev"
 	},
 	"repositories": [
@@ -25,7 +25,7 @@
 				"name": "pear/HTTP_Request",
 				"version": "trunk",
 				"source": {
-					"url": "https:\/\/github.com\/pear/HTTP_Request.git",
+					"url": "https://github.com/pear/HTTP_Request.git",
 					"type": "git",
 					"reference": "trunk"
 				}
@@ -34,7 +34,7 @@
 	],
 	"require": {
 		"php": ">=5.0.0",
-		"pear/HTTP_Request": "dev-trunk",
+		"pear/http_request": "dev-trunk",
 		"symfony/event-dispatcher": ">=2.8.26",
 		"detain/myadmin-plugin-installer": "dev-master"
     },
