@@ -105,9 +105,9 @@ class Plugin
     {
         $menu = $event->getSubject();
         if ($GLOBALS['tf']->ima == 'admin') {
-            $menu->add_link(self::$module, 'choice=none.reusable_ksplice', '/images/myadmin/to-do.png', __('ReUsable Ksplice Licenses'));
-            $menu->add_link(self::$module, 'choice=none.ksplice_list', '/images/myadmin/to-do.png', __('Ksplice Licenses Breakdown'));
-            $menu->add_link(self::$module.'api', 'choice=none.ksplice_licenses_list', '/images/whm/createacct.gif', __('List all Ksplice Licenses'));
+            $menu->add_link(self::$module, 'choice=none.reusable_ksplice', '/images/myadmin/to-do.png', _('ReUsable Ksplice Licenses'));
+            $menu->add_link(self::$module, 'choice=none.ksplice_list', '/images/myadmin/to-do.png', _('Ksplice Licenses Breakdown'));
+            $menu->add_link(self::$module.'api', 'choice=none.ksplice_licenses_list', '/images/whm/createacct.gif', _('List all Ksplice Licenses'));
         }
     }
 
@@ -135,8 +135,8 @@ class Plugin
          * @var \MyAdmin\Settings $settings
          **/
         $settings = $event->getSubject();
-        $settings->add_text_setting(self::$module, __('KSplice'), 'ksplice_api_username', __('Ksplice API Username'), __('Ksplice API Username'), $settings->get_setting('KSPLICE_API_USERNAME'));
-        $settings->add_text_setting(self::$module, __('KSplice'), 'ksplice_api_key', __('Ksplice API Key'), __('Ksplice API Key'), $settings->get_setting('KSPLICE_API_KEY'));
-        $settings->add_dropdown_setting(self::$module, __('KSplice'), 'outofstock_licenses_ksplice', __('Out Of Stock Ksplice Licenses'), __('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), ['0', '1'], ['No', 'Yes']);
+        $settings->add_text_setting(self::$module, _('KSplice'), 'ksplice_api_username', _('Ksplice API Username'), _('Ksplice API Username'), $settings->get_setting('KSPLICE_API_USERNAME'));
+        $settings->add_text_setting(self::$module, _('KSplice'), 'ksplice_api_key', _('Ksplice API Key'), _('Ksplice API Key'), $settings->get_setting('KSPLICE_API_KEY'));
+        $settings->add_dropdown_setting(self::$module, _('KSplice'), 'outofstock_licenses_ksplice', _('Out Of Stock Ksplice Licenses'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), ['0', '1'], ['No', 'Yes']);
     }
 }
