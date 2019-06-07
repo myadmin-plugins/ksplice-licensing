@@ -33,7 +33,7 @@
 	],
 	"require": {
 		"php": ">=5.0.0",
-		"pear/http_request": "*",
+		"pear/http_request": "dev-trunk",
 		"symfony/event-dispatcher": ">=2.8.26",
 		"detain/myadmin-plugin-installer": "*"
     },
