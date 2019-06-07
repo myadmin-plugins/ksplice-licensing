@@ -15,7 +15,7 @@
 		}
 	],
 	"config": {
-		"bin-dir": "vendor/bin",
+		"bin-dir": "vendor/bin"
 	},
 	"repositories": [
 		{
