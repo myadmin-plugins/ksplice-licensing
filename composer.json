@@ -22,14 +22,14 @@
 		"old_pear/http_request": "dev-trunk",
 		"symfony/event-dispatcher": ">=2.8.26",
 		"detain/myadmin-plugin-installer": "*"
-    },
+	},
 	"require-dev": {
 		"phpunit/phpunit": "*",
 		"phpunit/phpunit-mock-objects": "*",
 		"vlucas/phpdotenv": "*",
 		"codeclimate/php-test-reporter": "*",
 		"satooshi/php-coveralls": "*",
-		"codacy/coverage": *"
+		"codacy/coverage": "*"
 	},
 	"autoload": {
 		"psr-4": {
