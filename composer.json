@@ -17,23 +17,9 @@
 	"config": {
 		"bin-dir": "vendor/bin"
 	},
-	"repositories": [
-		{
-			"type": "package",
-			"package": {
-				"name": "pear/HTTP_Request",
-				"version": "trunk",
-				"source": {
-					"url": "https://github.com/pear/HTTP_Request.git",
-					"type": "git",
-					"reference": "trunk"
-				}
-			}
-		}
-	],
 	"require": {
 		"php": ">=5.0.0",
-		"pear/http_request": "dev-trunk",
+		"old_pear/http_request": "dev-trunk",
 		"symfony/event-dispatcher": ">=2.8.26",
 		"detain/myadmin-plugin-installer": "*"
     },
