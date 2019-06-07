@@ -16,7 +16,6 @@
 	],
 	"config": {
 		"bin-dir": "vendor/bin",
-		"minimum-stability": "dev"
 	},
 	"repositories": [
 		{
@@ -34,17 +33,17 @@
 	],
 	"require": {
 		"php": ">=5.0.0",
-		"pear/http_request": "dev-trunk",
+		"pear/http_request": "*",
 		"symfony/event-dispatcher": ">=2.8.26",
-		"detain/myadmin-plugin-installer": "dev-master"
+		"detain/myadmin-plugin-installer": "*"
     },
 	"require-dev": {
 		"phpunit/phpunit": "*",
 		"phpunit/phpunit-mock-objects": "*",
 		"vlucas/phpdotenv": "*",
-		"codeclimate/php-test-reporter": "dev-master",
+		"codeclimate/php-test-reporter": "*",
 		"satooshi/php-coveralls": "*",
-		"codacy/coverage": "dev-master"
+		"codacy/coverage": *"
 	},
 	"autoload": {
 		"psr-4": {
