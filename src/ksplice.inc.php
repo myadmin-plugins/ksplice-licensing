@@ -17,18 +17,18 @@
  */
 function deactivate_ksplice($ipAddressUuid)
 {
-	// Deactivate Ksplice
-	//
-	$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
-	if (validIp($ipAddressUuid, false)) {
-		$uuid = $ksplice->ipToUuid($ipAddressUuid);
-		myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
-	} else {
-		$uuid = $ipAddressUuid;
-	}
-	$response = $ksplice->deauthorizeMachine($uuid);
-	myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response ".json_encode($response), __LINE__, __FILE__);
-	return true;
+    // Deactivate Ksplice
+    //
+    $ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
+    if (validIp($ipAddressUuid, false)) {
+        $uuid = $ksplice->ipToUuid($ipAddressUuid);
+        myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
+    } else {
+        $uuid = $ipAddressUuid;
+    }
+    $response = $ksplice->deauthorizeMachine($uuid);
+    myadmin_log('licenses', 'info', "Deactivate Ksplice ({$ipAddressUuid}) Response ".json_encode($response), __LINE__, __FILE__);
+    return true;
 }
 
 /**
@@ -36,17 +36,17 @@ function deactivate_ksplice($ipAddressUuid)
  */
 function activate_ksplice($ipAddressUuid)
 {
-	// Deactivate Ksplice
-	//
-	$ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
-	if (validIp($ipAddressUuid, false)) {
-		$uuid = $ksplice->ipToUuid($ipAddressUuid);
-		myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
-	} else {
-		$uuid = $ipAddressUuid;
-	}
-	$ksplice->authorize_machine($uuid, true);
-	myadmin_log('licenses', 'info', 'Response: ' . $ksplice->response_raw, __LINE__, __FILE__);
-	myadmin_log('licenses', 'info', 'Response: ' . json_encode($ksplice->response), __LINE__, __FILE__);
-	return true;
+    // Deactivate Ksplice
+    //
+    $ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
+    if (validIp($ipAddressUuid, false)) {
+        $uuid = $ksplice->ipToUuid($ipAddressUuid);
+        myadmin_log('licenses', 'info', "Ksplice IP to UUID ({$ipAddressUuid}) Response {$uuid}", __LINE__, __FILE__);
+    } else {
+        $uuid = $ipAddressUuid;
+    }
+    $ksplice->authorize_machine($uuid, true);
+    myadmin_log('licenses', 'info', 'Response: ' . $ksplice->response_raw, __LINE__, __FILE__);
+    myadmin_log('licenses', 'info', 'Response: ' . json_encode($ksplice->response), __LINE__, __FILE__);
+    return true;
 }
