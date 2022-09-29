@@ -20,7 +20,7 @@
 	"require": {
 		"php": ">=5.0.0",
 		"old_pear/http_request": "dev-trunk",
-		"symfony/event-dispatcher": "5.0.x-dev",
+		"symfony/event-dispatcher": "^5.0@stable",
 		"detain/myadmin-plugin-installer": "*"
 	},
 	"require-dev": {
