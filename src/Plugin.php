@@ -136,7 +136,7 @@ class Plugin
          **/
         $settings = $event->getSubject();
         $settings->add_text_setting(self::$module, _('KSplice'), 'ksplice_api_username', _('Ksplice API Username'), _('Ksplice API Username'), $settings->get_setting('KSPLICE_API_USERNAME'));
-        $settings->add_text_setting(self::$module, _('KSplice'), 'ksplice_api_key', _('Ksplice API Key'), _('Ksplice API Key'), $settings->get_setting('KSPLICE_API_KEY'));
+        $settings->add_password_setting(self::$module, _('KSplice'), 'ksplice_api_key', _('Ksplice API Key'), _('Ksplice API Key'), $settings->get_setting('KSPLICE_API_KEY'));
         $settings->add_dropdown_setting(self::$module, _('KSplice'), 'outofstock_licenses_ksplice', _('Out Of Stock Ksplice Licenses'), _('Enable/Disable Sales Of This Type'), $settings->get_setting('OUTOFSTOCK_LICENSES_KSPLICE'), ['0', '1'], ['No', 'Yes']);
     }
 }
