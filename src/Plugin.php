@@ -89,7 +89,7 @@ class Plugin
                 $event['status'] = 'error';
                 $event['status_text'] = 'Error Code '.$result['faultcode'].': '.$result['fault'];
             } else {
-                $GLOBALS['tf']->history->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
+                \MyAdmin\App::history()->add($settings['TABLE'], 'change_ip', $event['newip'], $serviceClass->getId(), $serviceClass->getCustid());
                 $serviceClass->set_ip($event['newip'])->save();
                 $event['status'] = 'ok';
                 $event['status_text'] = 'The IP Address has been changed.';
@@ -104,7 +104,7 @@ class Plugin
     public static function getMenu(GenericEvent $event)
     {
         $menu = $event->getSubject();
-        if ($GLOBALS['tf']->ima == 'admin') {
+        if (\MyAdmin\App::ima() == 'admin') {
             $menu->add_link(self::$module, 'choice=none.reusable_ksplice', '/images/myadmin/to-do.png', _('ReUsable Ksplice Licenses'));
             $menu->add_link(self::$module, 'choice=none.ksplice_list', '/images/myadmin/to-do.png', _('Ksplice Licenses Breakdown'));
             $menu->add_link(self::$module.'api', 'choice=none.ksplice_licenses_list', '/images/whm/createacct.gif', _('List all Ksplice Licenses'));
