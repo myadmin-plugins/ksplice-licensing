@@ -52,9 +52,21 @@ class Plugin
             $ksplice = new \Detain\MyAdminKsplice\Ksplice(KSPLICE_API_USERNAME, KSPLICE_API_KEY);
             $uuid = $ksplice->ipToUuid($serviceClass->getIp());
             myadmin_log(self::$module, 'info', "Got UUID $uuid from IP ".$serviceClass->getIp(), __LINE__, __FILE__, self::$module, $serviceClass->getId());
+            if (empty($uuid)) {
+                $event['success'] = false;
+                myadmin_log(self::$module, 'error', 'Ksplice ipToUuid returned empty for IP '.$serviceClass->getIp(), __LINE__, __FILE__, self::$module, $serviceClass->getId());
+                chatNotify('Failed [License '.$serviceClass->getId().'](https://my.interserver.net/admin/view_service?id='.$serviceClass->getId().'&module=licenses) Ksplice Activation IP:'.$serviceClass->getIp().' - ipToUuid returned empty (machine not found)', 'notifications');
+                $event->stopPropagation();
+                return;
+            }
             $ksplice->authorizeMachine($uuid, true);
             myadmin_log(self::$module, 'info', 'Response: '.$ksplice->responseRaw, __LINE__, __FILE__, self::$module, $serviceClass->getId());
             myadmin_log(self::$module, 'info', 'Response: '.json_encode($ksplice->response), __LINE__, __FILE__, self::$module, $serviceClass->getId());
+            if (isset($ksplice->response['error']) || (is_array($ksplice->response) && isset($ksplice->response['authorized']) && $ksplice->response['authorized'] !== true)) {
+                $event['success'] = false;
+                myadmin_log(self::$module, 'error', 'Ksplice authorizeMachine failed for UUID '.$uuid.' Response: '.$ksplice->responseRaw, __LINE__, __FILE__, self::$module, $serviceClass->getId());
+                chatNotify('Failed [License '.$serviceClass->getId().'](https://my.interserver.net/admin/view_service?id='.$serviceClass->getId().'&module=licenses) Ksplice Activation IP:'.$serviceClass->getIp().' UUID:'.$uuid.' - authorizeMachine error: '.$ksplice->responseRaw, 'notifications');
+            }
             $event->stopPropagation();
         }
     }
