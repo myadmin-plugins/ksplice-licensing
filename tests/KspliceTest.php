@@ -350,12 +350,67 @@ class KspliceTest extends TestCase
     }
 
     /**
-     * Test that the class has exactly the expected number of properties.
+     * The Uptrack credentials must never become part of the object's externally
+     * visible state: instances of this client get passed around and json_encoded
+     * while logging API responses, so a credential field that is public (or that
+     * gets copied into a public field) would leak the account key into the logs.
      */
-    public function testPropertyCount(): void
+    public function testCredentialsAreNotPartOfPublicObjectState(): void
     {
-        $properties = $this->reflection->getProperties();
-        $this->assertCount(12, $properties);
+        $instance = $this->reflection->newInstanceWithoutConstructor();
+        $credentials = ['apiUsername' => 'uptrack-user', 'apiKey' => 'super-secret-key'];
+        foreach ($credentials as $name => $value) {
+            $property = $this->reflection->getProperty($name);
+            $property->setAccessible(true);
+            $property->setValue($instance, $value);
+        }
+
+        // Called from outside the class, so this sees only the public surface.
+        $publicState = get_object_vars($instance);
+        foreach (array_keys($credentials) as $name) {
+            $this->assertArrayNotHasKey(
+                $name,
+                $publicState,
+                "Credential property {$name} must not be publicly readable"
+            );
+        }
+        foreach ($credentials as $value) {
+            $this->assertStringNotContainsString(
+                $value,
+                (string) json_encode($publicState),
+                'Credentials must not be reachable through the public object state'
+            );
+        }
+    }
+
+    /**
+     * Each client keeps its own machine cache. If any of the cache properties were
+     * ever made static, two Ksplice clients built with different Uptrack accounts
+     * would answer ipToUuid() from each other's machine lists.
+     */
+    public function testMachineCachesArePerInstance(): void
+    {
+        foreach ($this->reflection->getProperties() as $property) {
+            $this->assertFalse(
+                $property->isStatic(),
+                "Property {$property->getName()} must not be static; client state has to stay per-instance"
+            );
+        }
+
+        $first = $this->reflection->newInstanceWithoutConstructor();
+        $second = $this->reflection->newInstanceWithoutConstructor();
+
+        $machine = ['uuid' => 'abc-123', 'ip' => '10.0.0.1', 'hostname' => 'host1'];
+        $first->machinesLoaded = true;
+        $first->ips = ['10.0.0.1' => $machine];
+        $first->hosts = ['host1' => $machine];
+        $first->uuids = ['abc-123' => $machine];
+
+        $this->assertSame('abc-123', $first->ipToUuid('10.0.0.1'));
+        $this->assertFalse($second->machinesLoaded, 'A second client must start with an unloaded cache');
+        $this->assertSame([], $second->ips);
+        $this->assertSame([], $second->hosts);
+        $this->assertSame([], $second->uuids);
     }
 
     /**
