@@ -17,9 +17,26 @@
 	"config": {
 		"bin-dir": "vendor/bin"
 	},
+	"minimum-stability": "dev",
+	"prefer-stable": true,
+	"repositories": [
+		{
+			"type": "package",
+			"package": {
+				"name": "pear/net_url",
+				"version": "trunk",
+				"source": {
+					"url": "https://github.com/pear/Net_URL.git",
+					"type": "git",
+					"reference": "trunk"
+				}
+			}
+		}
+	],
 	"require": {
 		"php": ">=5.0.0",
 		"old_pear/http_request": "dev-trunk",
+		"pear/net_url": "dev-trunk",
 		"symfony/event-dispatcher": "*@stable",
 		"detain/myadmin-plugin-installer": "*"
 	},
