@@ -1,6 +1,6 @@
 ---
 name: phpunit-reflection-tests
-description: Writes PHPUnit 9 tests in `tests/` using ReflectionClass to inspect class structure without invoking constructors. Use when user says 'add test', 'write test for', 'test this class', or adds new methods to `src/`. Tests go in `Detain\MyAdminKsplice\Tests\` namespace. Use `newInstanceWithoutConstructor()` for classes with external deps (e.g. Ksplice, RESTClient). Do NOT instantiate Ksplice directly — it requires live API credentials. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Writes PHPUnit 9 tests in `tests/` using ReflectionClass to inspect class structure without invoking constructors. Use when user says 'add test', 'write test for', 'test this class', or adds new methods to `src/`. Tests go in `Detain\MyAdminKsplice\Tests\` namespace. Use `newInstanceWithoutConstructor()` for classes with external deps (e.g. Ksplice, RESTClient). Do NOT instantiate Ksplice directly — it requires live API credentials. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file

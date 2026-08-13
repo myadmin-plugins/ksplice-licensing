@@ -1,6 +1,6 @@
 ---
 name: ksplice-api-client
-description: Adds or modifies methods on src/Ksplice.php following the existing REST request pattern. Use when user says 'add API method', 'call Ksplice endpoint', 'new Uptrack API call', or modifies src/Ksplice.php. Sets $this->url, $this->method, $this->inputs then calls $this->request(). Do NOT use for plugin hook changes (use plugin hook pattern instead) or for RESTClient internals. NOTE: for a plugin's contract/behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
+description: Adds or modifies methods on src/Ksplice.php following the existing REST request pattern. Use when user says 'add API method', 'call Ksplice endpoint', 'new Uptrack API call', or modifies src/Ksplice.php. Sets $this->url, $this->method, $this->inputs then calls $this->request(). Do NOT use for plugin hook changes (use plugin hook pattern instead) or for RESTClient internals. For a plugin's contract or behavioral tests (tests/ContractTest.php, the shared harness, composer myadmin:scaffold-tests) use the plugin-contract-tests skill instead — this skill's reflection-only guidance predates that harness.
 ---
 <!-- myadmin-contract-harness-notice -->
 > ### ⚠️ Read this before the rest of the file
