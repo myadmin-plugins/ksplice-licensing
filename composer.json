@@ -15,7 +15,10 @@
 		}
 	],
 	"config": {
-		"bin-dir": "vendor/bin"
+		"bin-dir": "vendor/bin",
+		"allow-plugins": {
+			"detain/myadmin-plugin-installer": true
+		}
 	},
 	"minimum-stability": "dev",
 	"prefer-stable": true,
@@ -38,7 +41,7 @@
 		"old_pear/http_request": "dev-trunk",
 		"pear/net_url": "dev-trunk",
 		"symfony/event-dispatcher": "*@stable",
-		"detain/myadmin-plugin-installer": "*"
+		"detain/myadmin-plugin-installer": "^2.1"
 	},
 	"require-dev": {
 		"phpunit/phpunit": "^9.6"
